@@ -2,8 +2,8 @@ from typing import List
 from dataclasses import dataclass, field
 import logging
 import traceback
-from context import Context
-from abstract_action import AbstractAction
+from src.framework.context import Context
+from src.framework.abstract_action import AbstractAction
 
 logging.basicConfig(
     level=logging.INFO,

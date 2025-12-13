@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
-from context import Context
-from telemetry import Telemetry
+from src.framework.context import Context
+from src.framework.telemetry import Telemetry
 
 class AbstractAction(ABC):
     telemetry: Telemetry = None
