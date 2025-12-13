@@ -7,8 +7,8 @@ class AbstractAction(ABC):
     telemetry: Telemetry = None
     is_error: bool = False
 
-    def __init__(self, action_name: str) -> None:
-        self.telemetry: Telemetry = Telemetry(action_name)
+    def __init__(self) -> None:
+        self.telemetry: Telemetry = Telemetry(self.__class__.__name__)
 
     def is_executable(self, context: Context) -> bool:
         """ check if action is executable """
