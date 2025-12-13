@@ -4,7 +4,6 @@ from src.framework.context import Context
 from src.framework.telemetry import Telemetry
 
 class AbstractAction(ABC):
-    telemetry: Telemetry = None
     is_error: bool = False
 
     def __init__(self) -> None:

@@ -5,11 +5,6 @@ import traceback
 from src.framework.context import Context
 from src.framework.abstract_action import AbstractAction
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s - %(message)s"
-)
-
 @dataclass
 class Workflow:
     context: Context = Context()
@@ -21,24 +16,25 @@ class Workflow:
             # init
             action_name = action.__class__.__name__
             action.telemetry.start()
-            is_error = None
 
             # execute
             is_executable = action.is_executable(self.context)
             if is_executable:
                 try:
-                    is_error = action.execute(self.context)
-                except Exception as e:
+                    logging.info(f"{action_name} start")
+                    action.execute(self.context)
+                    logging.info(f"{action_name} end")
+                except Exception as exception:
                     traceback.print_exc() 
-                    logging.error(f"Workflow :: execute :: exception :: {action=}, {exception=}, {context=}")
-                    is_error = True
+                    logging.error(f"Workflow exception {action_name=}, {exception=}, {self.context=}")
+                    action.is_error = True
                     action.handle_error(self.context)
             else:
-                logging.warn(f"Workflow :: execute :: skipped :: {action_name} is skipped, {is_executable=}, {context=}")
+                logging.warn(f"Workflow action skipped {action_name=}, {is_executable=}, {self.context=}")
 
             # telemetry
-            action.telemetry.is_error = is_error
+            is_error = action.is_error
+            action.telemetry.is_error = action.is_error
             action.telemetry.end()
             time_taken = action.telemetry.time_taken
-            logging.info(f"Workflow :: execute :: end :: {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
-            
+            logging.info(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")

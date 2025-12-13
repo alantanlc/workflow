@@ -2,10 +2,10 @@ import logging
 from src.framework.abstract_action import AbstractAction
 from src.framework.context import Context
 
-class SampleAction(AbstractAction):
+class SampleNotExecutableAction(AbstractAction):
     
     def is_executable(self, context: Context) -> bool:
-        return True
+        return False
 
     def execute(self, context: Context) -> bool:
         return True
