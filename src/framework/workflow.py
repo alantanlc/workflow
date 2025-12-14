@@ -37,4 +37,10 @@ class Workflow:
             action.telemetry.is_error = action.is_error
             action.telemetry.end()
             time_taken = action.telemetry.time_taken
-            logging.info(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
+
+            if is_error:
+                logging.error(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
+            elif not is_executable:
+                logging.warn(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
+            else:
+                logging.info(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")

@@ -8,4 +8,5 @@ class SampleExceptionAction(AbstractAction):
         return True
 
     def execute(self, context: Context) -> bool:
+        logging.info("SampleExceptionAction execute")
         raise Exception("Generic exception")

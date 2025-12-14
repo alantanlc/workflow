@@ -8,4 +8,5 @@ class SampleNotExecutableAction(AbstractAction):
         return False
 
     def execute(self, context: Context) -> bool:
+        logging.info("SampleNotExecutableAction execute")
         return True
