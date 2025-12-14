@@ -4,6 +4,7 @@ from src.framework.workflow import Workflow
 from src.action.sample.happy_action import HappyAction
 from src.action.sample.exception_action import ExceptionAction
 from src.action.sample.not_executable_action import NotExecutableAction
+from src.action.sample.happy_error_action import HappyErrorAction
 
 logging.basicConfig(
     level=logging.INFO,
@@ -18,6 +19,7 @@ def main():
         HappyAction(),
         ExceptionAction(),
         NotExecutableAction(),
+        HappyErrorAction(),
     ]
 
     # workflow

@@ -21,16 +21,14 @@ class Workflow:
             is_executable = action.is_executable(self.context)
             if is_executable:
                 try:
-                    logging.info(f"{action_name} start")
                     action.execute(self.context)
-                    logging.info(f"{action_name} end")
                 except Exception as exception:
                     traceback.print_exc() 
                     logging.error(f"Workflow exception {action_name=}, {exception=}, {self.context=}")
                     action.is_error = True
                     action.handle_error(self.context)
             else:
-                logging.warn(f"Workflow action skipped {action_name=}, {is_executable=}, {self.context=}")
+                logging.warn(f"Workflow skipped {action_name=}, {is_executable=}, {self.context=}")
 
             # telemetry
             is_error = action.is_error
@@ -39,8 +37,8 @@ class Workflow:
             time_taken = action.telemetry.time_taken
 
             if is_error:
-                logging.error(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
+                logging.error(f"Workflow end {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
             elif not is_executable:
-                logging.warn(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
+                logging.warn(f"Workflow end {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
             else:
-                logging.info(f"Workflow {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
+                logging.info(f"Workflow end {action_name=}, {is_executable=}, {is_error=}, {time_taken=}\n")
