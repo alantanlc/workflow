@@ -1,9 +1,9 @@
 import logging
 
 from src.framework.workflow import Workflow
-from src.action.sample.sample_happy_action import SampleHappyAction
-from src.action.sample.sample_exception_action import SampleExceptionAction
-from src.action.sample.sample_not_executable_action import SampleNotExecutableAction
+from src.action.sample.happy_action import HappyAction
+from src.action.sample.exception_action import ExceptionAction
+from src.action.sample.not_executable_action import NotExecutableAction
 
 logging.basicConfig(
     level=logging.INFO,
@@ -15,9 +15,9 @@ def main():
 
     # actions
     actions = [
-        SampleHappyAction(),
-        SampleExceptionAction(),
-        SampleNotExecutableAction(),
+        HappyAction(),
+        ExceptionAction(),
+        NotExecutableAction(),
     ]
 
     # workflow

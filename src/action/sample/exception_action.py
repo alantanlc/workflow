@@ -2,11 +2,11 @@ import logging
 from src.framework.abstract_action import AbstractAction
 from src.framework.context import Context
 
-class SampleNotExecutableAction(AbstractAction):
+class ExceptionAction(AbstractAction):
     
     def is_executable(self, context: Context) -> bool:
-        return False
+        return True
 
     def execute(self, context: Context) -> bool:
-        logging.info("SampleNotExecutableAction execute")
-        return True
+        logging.info("ExceptionAction execute")
+        raise Exception("Generic exception")
